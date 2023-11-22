@@ -9,7 +9,7 @@ import torch
 from PIL import Image
 from validacion import test_pipeline
 
-app = Flask(_name_)
+app = Flask(__name__)
 CORS(app)
 url_base = "https://shaggy-roses-arrive.loca.lt"
 
@@ -132,7 +132,7 @@ def home():
     return 'Home Page'
 
 
-if _name_ == '_main_':
+if __name__ == '_main_':
     with open('config.json', 'r') as config_file:
         config = json.load(config_file)
         PLAN_DIR = config.get('image_directory', os.getcwd())
