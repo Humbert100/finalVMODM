@@ -145,17 +145,17 @@ def post_real():
         }
     })
 
-
+with open('/home/opc/finalVMODM/config.json', 'r') as config_file:
+    config = json.load(config_file)
+    PLAN_DIR = config.get('image_directory', os.getcwd())
+    REAL_DIR = config.get('result_directory', os.getcwd())
+    
 @app.route('/')
 def home():
     return 'Home Page'
 
 
 if __name__ == '__main__':
-    with open('config.json', 'r') as config_file:
-        config = json.load(config_file)
-        PLAN_DIR = config.get('image_directory', os.getcwd())
-        REAL_DIR = config.get('result_directory', os.getcwd())
 
     # load model
     model = torch.hub.load('yolov5', 'custom', path='yolov5/runs/train/exp/weights/best.pt', source='local', verbose=0)
