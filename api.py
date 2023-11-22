@@ -40,7 +40,7 @@ def reload_plans():
     )
 
     # overwrite plans
-    PLAN_DICT = {i: filename for i, filename in enumerate(image_list)}
+    PLAN_DICT = {i: filename for i, filename in enumerate(image_list,1)}
 
 
 def process_real(id: int, real_img: np.array):
