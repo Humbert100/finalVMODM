@@ -8,11 +8,8 @@ import re
 import torch
 from PIL import Image
 from validacion import test_pipeline
-from flask import Flask
-from flask_ngrok import run_with_ngrok
 
 app = Flask(__name__)
-run_with_ngrok(app)
 CORS(app)
 
 
@@ -155,6 +152,7 @@ def home():
 
 
 if __name__ == '__main__':
+    app.run(port=5000)
     with open('config.json', 'r') as config_file:
         config = json.load(config_file)
         PLAN_DIR = config.get('image_directory', os.getcwd())
