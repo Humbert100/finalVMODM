@@ -155,7 +155,6 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run()
     with open('config.json', 'r') as config_file:
         config = json.load(config_file)
         PLAN_DIR = config.get('image_directory', os.getcwd())
@@ -166,4 +165,4 @@ if __name__ == '__main__':
     model.eval()
 
     reload_plans()
-    app.run(debug=True)
+    app.run()  # Aquí se inicia la aplicación con ngrok
