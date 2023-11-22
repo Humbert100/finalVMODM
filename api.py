@@ -82,7 +82,7 @@ def get_plans():
     for i, filename in PLAN_DICT.items():
         name, ext = filename.rsplit('.', 1)
         image_data.append({
-            'id': i+1,
+            'id': i,
             'name': name,
             'image': URL_BASE + url_for('static', filename=filename)
         })
