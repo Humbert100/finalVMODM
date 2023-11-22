@@ -1,7 +1,7 @@
 # VM FINAL FLASK 
 ---
 Estos son los comandos para correr la app y el localtunnel (para escuchar el puerto).
-1. Como se necesita tener corriendo dos comandos al mismo tiempo (la app y el que escucha el port) se debe ejecutar `tmux`.
+1. Como se necesita tener corriendo dos comandos al mismo tiempo (la app y el que escucha el port) se debe ejecutar ```tmux```.
 2. Para crear una ventana: [ctrl + B] [C]: necesitas tener dos ventanas.
 3. Ya que tienes las ventanas, en la primera corre la api.
 4. Cambia de ventana con [ctrl + B] [N]: ejecuta `lt --port 5000`
@@ -11,6 +11,6 @@ Estos son los comandos para correr la app y el localtunnel (para escuchar el pue
 
 **Importante:** la url vence alrededor de una hora y se tiene que volver a ejecutar el comando `lt --port 5000`.
 <br>
-No necesitarías instalar algun package y/o requeriments ni clonar el repo en teoría.  
+No necesitarías instalar algun package y/o requeriments ni clonar el repo en teoría porque ya está.  
 <br>
 Lo único que me falta de comprobar es el post. 
