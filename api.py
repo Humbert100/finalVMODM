@@ -12,7 +12,7 @@ from validacion import test_pipeline
 app = Flask(__name__)
 CORS(app)
 
-
+URL_BASE = "https://shaggy-roses-arrive.loca.lt"
 PLAN_DICT = {}
 REALOGRAM = np.empty(0)
 PLAN_ID = -1
@@ -82,9 +82,9 @@ def get_plans():
     for i, filename in PLAN_DICT.items():
         name, ext = filename.rsplit('.', 1)
         image_data.append({
-            'id': i,
+            'id': i+1,
             'name': name,
-            'image': url_for('static', filename=filename)
+            'image': URL_BASE + url_for('static', filename=filename)
         })
 
     return jsonify({
@@ -139,7 +139,7 @@ def post_real():
     return jsonify({
         "data":
         {
-            'image': url_for('static', filename=processed_image_name),
+            'image': URL_BASE + url_for('static', filename=processed_image_name),
             "score": score,
             "errors": errors
         }
