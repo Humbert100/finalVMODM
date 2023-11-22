@@ -11,7 +11,7 @@ from validacion import test_pipeline
 
 app = Flask(__name__)
 CORS(app)
-url_base = "https://shaggy-roses-arrive.loca.lt"
+
 
 PLAN_DICT = {}
 REALOGRAM = np.empty(0)
@@ -84,7 +84,7 @@ def get_plans():
         image_data.append({
             'id': i,
             'name': name,
-            'image': url_base + url_for('static', filename=filename)
+            'image': url_for('static', filename=filename)
         })
 
     return jsonify({
@@ -98,20 +98,39 @@ def get_plans():
 
 @app.post('/post-real')
 def post_real():
+    """Incoming requests should look like:
+    {
+            "data":
+            {
+                "image": ???,
+                "plan-id": 1
+            }
+        }
+
+        Returns JSON like:
+    {
+        "data":
+        {
+            "image": ???,
+            "score": 0.98227931096978203,
+            "errors":
+            [
+                "En {pos} se detectó {prod1} en lugar de {prod2}",
+                "En {pos} se detectó {prod} sobrante",
+                "En {pos} se detectó {prod} faltante"
+            ]
+        }
+    }
+    """
     global REALOGRAM, PLAN_ID, EXT
-
+    
     file = request.files.get('image', None)
-    PLAN_ID = int(request.form.get('plan-id', -1))
+    if file is None:
+        return redirect('/')
 
-    if not file:
-        return "No se ha proporcionado una imagen.", 400
-
-    if not PLAN_ID:
-        return "No se ha proporcionado un ID de plan.", 400
-
-    # Procesar la imagen
     REALOGRAM = Image.open(io.BytesIO(file.read()))
-
+    PLAN_ID = int(request.form.get('plan-id', -1))
+    
     if PLAN_ID == -1:
         return redirect('/')
 
@@ -120,7 +139,7 @@ def post_real():
     return jsonify({
         "data":
         {
-            'image': url_base + url_for('static', filename=processed_image_name),
+            'image': url_for('static', filename=processed_image_name),
             "score": score,
             "errors": errors
         }
@@ -132,7 +151,7 @@ def home():
     return 'Home Page'
 
 
-if __name__ == '_main_':
+if __name__ == '__main__':
     with open('config.json', 'r') as config_file:
         config = json.load(config_file)
         PLAN_DIR = config.get('image_directory', os.getcwd())
