@@ -152,8 +152,7 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
-    with open('/home/opc/finalVMODM/config.json', 'r') as config_file:
+    with open('config.json', 'r') as config_file:
         config = json.load(config_file)
         PLAN_DIR = config.get('image_directory', os.getcwd())
         REAL_DIR = config.get('result_directory', os.getcwd())
@@ -164,4 +163,3 @@ if __name__ == '__main__':
 
     reload_plans()
     app.run(debug=True)
-
